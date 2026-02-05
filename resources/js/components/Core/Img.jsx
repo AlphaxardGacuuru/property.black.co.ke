@@ -9,6 +9,10 @@ const Img = ({
 	alt = "image",
 }) => {
 	const handleError = (e) => {
+		// Prevent infinite loop if fallback image also fails
+		if (e.target.src.includes("male-avatar.png")) {
+			return;
+		}
 		// Set fallback to male-avatar.png for broken images
 		e.target.src = "/storage/avatars/male-avatar.png"
 	}

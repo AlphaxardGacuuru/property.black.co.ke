@@ -16,7 +16,7 @@
     <title>{{ config('app.name', 'Black Property') }}</title>
 
     <!-- Favicon  -->
-    <link rel="icon" href="storage/img/favicon.ico">
+    <link rel="icon" href="/favicon.ico">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -40,7 +40,7 @@
         rel="stylesheet">
 
     {{-- IOS support --}}
-    <link rel="apple-touch-icon" href="storage/img/musical-note.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
 </head>
 

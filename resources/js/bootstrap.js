@@ -1,4 +1,5 @@
 import _ from "lodash"
+import CryptoJS from "crypto-js"
 window._ = _
 
 /**
@@ -36,17 +37,25 @@ const getLocalStorage = (state) => {
 
 // Decrypt Sanctum Token
 const decryptedToken = () => {
-	import("crypto-js").then((CryptoJS) => {
-		const secretKey = "BlackPropertyAuthorizationToken"
+	const secretKey = "BlackPropertyAuthorizationToken"
+	const token = getLocalStorage("sanctumToken")
+	
+	if (!token || token.length === 0) {
+		return ""
+	}
 
+	try {
 		// Decrypt
-		var bytes = CryptoJS.default.AES.decrypt(
-			getLocalStorage("sanctumToken"),
+		var bytes = CryptoJS.AES.decrypt(
+			token,
 			secretKey
 		)
 
-		return bytes.toString(CryptoJS.default.enc.Utf8)
-	})
+		return bytes.toString(CryptoJS.enc.Utf8)
+	} catch (e) {
+		console.error("Token decryption failed", e)
+		return ""
+	}
 }
 
 import Axios from "axios"
