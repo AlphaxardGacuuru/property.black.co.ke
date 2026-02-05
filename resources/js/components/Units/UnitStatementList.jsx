@@ -2,33 +2,34 @@ import React, { useEffect, useState } from "react"
 
 import StatementList from "@/components/Statements/StatementList"
 
-const UnitStatementList = (props) => {
+const UnitStatementList = ({
+	unit = { id: "" },
+	userUnitId = "",
+	...props
+}) => {
 	const [statements, setStatements] = useState([])
 
 	useEffect(() => {
 		// Fetch Statements
-		if (props.unit?.id || props.tenant?.userUnitId) {
+		if (unit?.id || props.tenant?.userUnitId) {
 			props.getPaginated(
 				`statements/unit?
-				unitId=${props.unit?.id}&
+				unitId=${unit?.id}&
 				userUnitId=${props.tenant?.userUnitId}&`,
 				setStatements
 			)
 		}
-	}, [props.unit, props.tenant])
+	}, [unit, props.tenant])
 
 	return (
 		<StatementList
 			{...props}
+			unit={unit}
+			userUnitId={userUnitId}
 			statements={statements}
 			setStatements={setStatements}
 		/>
 	)
-}
-
-UnitStatementList.defaultProps = {
-	unit: { id: "" },
-	userUnitId: "",
 }
 
 export default UnitStatementList

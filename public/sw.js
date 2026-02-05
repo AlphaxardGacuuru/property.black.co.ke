@@ -54,7 +54,9 @@ self.addEventListener('fetch', (e) => {
 					.open(cacheName)
 					.then((cache) => {
 						// Add response to cache
-						cache.put(e.request, resClone);
+						if (e.request.url.startsWith('http')) {
+							cache.put(e.request, resClone);
+						}
 					});
 				return res
 			}).catch((err) => cache.match(e.request).then(res => res))

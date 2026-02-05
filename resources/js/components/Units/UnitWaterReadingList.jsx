@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 
 import WaterReadingList from "@/components/Water/WaterReadingList"
 
-const UnitWaterReadingList = (props) => {
+const UnitWaterReadingList = ({ userUnitId = "", ...props }) => {
 	const [waterReadings, setWaterReadings] = useState([])
 
 	const [tenant, setTenant] = useState("")
@@ -32,6 +32,7 @@ const UnitWaterReadingList = (props) => {
 	return (
 		<WaterReadingList
 			{...props}
+			userUnitId={userUnitId}
 			waterReadings={waterReadings}
 			setWaterReadings={setWaterReadings}
 			setTenant={setTenant}
@@ -42,10 +43,6 @@ const UnitWaterReadingList = (props) => {
 			setEndYear={setEndYear}
 		/>
 	)
-}
-
-UnitWaterReadingList.defaultProps = {
-	userUnitId: "",
 }
 
 export default UnitWaterReadingList

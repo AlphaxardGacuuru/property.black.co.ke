@@ -43,12 +43,11 @@ const Messages = ({
 			setTimeout(() => setFormErrors([]), 10000)
 		}
 
-		return () => {}
+		return () => { }
 	}, [messages, errors])
 
 	return (
 		<ToastContainer
-			toastId="messages-toast" // Unique ID for this toast
 			position="top-right"
 			autoClose={10000}
 			hideProgressBar={false}

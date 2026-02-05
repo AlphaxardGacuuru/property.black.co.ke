@@ -9,7 +9,7 @@ const FlutterWaveHookBtn = (props) => {
 	const [loading, setLoading] = useState()
 
 	const config = {
-		public_key: process.env.MIX_FW_PUBLIC_KEY_SANDBOX,
+		public_key: import.meta.env.VITE_FW_PUBLIC_KEY_SANDBOX,
 		tx_ref: Date.now(),
 		amount: 100,
 		currency: "KES",

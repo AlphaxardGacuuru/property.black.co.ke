@@ -1,9 +1,8 @@
+import CreditNoteList from "@/components/CreditNotes/CreditNoteList"
 import React, { useEffect, useState } from "react"
 
-import DeductionList from "@/components/Deductions/DeductionList"
-
-const UnitDeductionList = (props) => {
-	const [deductions, setDeductions] = useState([])
+const UnitCreditNoteList = ({ userUnitId = "", ...props }) => {
+	const [creditNotes, setCreditNotes] = useState([])
 
 	const [tenant, setTenant] = useState("")
 	const [unit, setUnit] = useState("")
@@ -14,9 +13,9 @@ const UnitDeductionList = (props) => {
 	const [endYear, setEndYear] = useState("")
 
 	useEffect(() => {
-		// Fetch Deduction
+		// Fetch Credit Note
 		props.getPaginated(
-			`deductions?
+			`credit-notes?
 			propertyId=${props.unit?.propertyId}&
 			unitId=${props.unit?.id}&
 			tenant=${tenant}&
@@ -27,7 +26,7 @@ const UnitDeductionList = (props) => {
 			endMonth=${endMonth}&
 			startYear=${startYear}&
 			endYear=${endYear}`,
-			setDeductions
+			setCreditNotes
 		)
 	}, [
 		props.selectedPropertyId,
@@ -44,28 +43,24 @@ const UnitDeductionList = (props) => {
 	return (
 		<div className="row">
 			<div className="col-sm-12">
-				{/* Deductions Tab */}
-				<DeductionList
+				{/* Credit Notes Tab */}
+				<CreditNoteList
 					{...props}
 					unit={props.unit}
-					deductions={deductions}
-					setDeductions={setDeductions}
-					setInvoiceCode={setInvoiceCode}
+					creditNotes={creditNotes}
+					setCreditNotes={setCreditNotes}
 					setUnit={setUnit}
+					setInvoiceCode={setInvoiceCode}
 					setTenant={setTenant}
 					setStartMonth={setStartMonth}
 					setEndMonth={setEndMonth}
 					setStartYear={setStartYear}
 					setEndYear={setEndYear}
 				/>
-				{/* Deductions Tab End */}
+				{/* Credit Notes Tab End */}
 			</div>
 		</div>
 	)
 }
 
-UnitDeductionList.defaultProps = {
-	userUnitId: "",
-}
-
-export default UnitDeductionList
+export default UnitCreditNoteList

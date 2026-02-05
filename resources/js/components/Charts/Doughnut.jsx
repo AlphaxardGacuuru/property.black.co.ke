@@ -1,13 +1,14 @@
 import React, { useEffect, useRef } from "react"
 
-const Pie = (props) => {
+const Doughnut = ({ cutout = "60%", size = "1em", ...props }) => {
 	const ctx = useRef()
 
 	var delayed
 
 	const config = {
-		type: "pie",
+		type: "doughnut",
 		options: {
+			cutout: cutout,
 			radius: "100%",
 			animation: {
 				onComplete: () => {
@@ -31,6 +32,7 @@ const Pie = (props) => {
 			labels: props.labels,
 			datasets: props.datasets,
 		},
+		plugins: props.plugins,
 	}
 
 	useEffect(() => {
@@ -44,9 +46,4 @@ const Pie = (props) => {
 	)
 }
 
-Pie.defaultProps = {
-	cutout: "60%",
-	size: "1em",
-}
-
-export default Pie
+export default Doughnut

@@ -1,39 +1,49 @@
-import CreditNoteList from "@/components/CreditNotes/CreditNoteList"
 import React, { useEffect, useState } from "react"
 
-const UnitCreditNoteList = (props) => {
-	const [creditNotes, setCreditNotes] = useState([])
+import InvoiceList from "@/components/Invoices/InvoiceList"
 
-	const [tenant, setTenant] = useState("")
+const UnitInvoiceList = ({ userUnitId = "", ...props }) => {
+	const [invoices, setInvoices] = useState([])
+
+	const [number, setNumber] = useState("")
+	const [invoice, setInvoice] = useState("")
 	const [unit, setUnit] = useState("")
-	const [invoiceCode, setInvoiceCode] = useState("")
+	const [tenant, setTenant] = useState("")
+	const [type, setType] = useState("")
+	const [status, setStatus] = useState("")
 	const [startMonth, setStartMonth] = useState("")
 	const [startYear, setStartYear] = useState("")
 	const [endMonth, setEndMonth] = useState("")
 	const [endYear, setEndYear] = useState("")
 
 	useEffect(() => {
-		// Fetch Credit Note
+		// Fetch Invoices
 		props.getPaginated(
-			`credit-notes?
+			`invoices?
 			propertyId=${props.unit?.propertyId}&
 			unitId=${props.unit?.id}&
+			number=${number}&
+			invoice=${invoice}&
+			unit=${unit}&
 			tenant=${tenant}&
 			tenantId=${props.tenant?.id}&
-			unit=${unit}&
-			invoiceCode=${invoiceCode}&
+			type=${type}&
+			status=${status}&
 			startMonth=${startMonth}&
 			endMonth=${endMonth}&
 			startYear=${startYear}&
 			endYear=${endYear}`,
-			setCreditNotes
+			setInvoices
 		)
 	}, [
 		props.selectedPropertyId,
 		props.tenant,
-		tenant,
+		number,
+		invoice,
 		unit,
-		invoiceCode,
+		tenant,
+		type,
+		status,
 		startMonth,
 		endMonth,
 		startYear,
@@ -43,28 +53,26 @@ const UnitCreditNoteList = (props) => {
 	return (
 		<div className="row">
 			<div className="col-sm-12">
-				{/* Credit Notes Tab */}
-				<CreditNoteList
+				{/* Invoices Tab */}
+				<InvoiceList
 					{...props}
-					unit={props.unit}
-					creditNotes={creditNotes}
-					setCreditNotes={setCreditNotes}
+					invoices={invoices}
+					setInvoices={setInvoices}
+					setNumber={setNumber}
+					setInvoice={setNumber}
 					setUnit={setUnit}
-					setInvoiceCode={setInvoiceCode}
 					setTenant={setTenant}
+					setType={setType}
+					setStatus={setStatus}
 					setStartMonth={setStartMonth}
 					setEndMonth={setEndMonth}
 					setStartYear={setStartYear}
 					setEndYear={setEndYear}
 				/>
-				{/* Credit Notes Tab End */}
+				{/* Invoices Tab End */}
 			</div>
 		</div>
 	)
 }
 
-UnitCreditNoteList.defaultProps = {
-	userUnitId: "",
-}
-
-export default UnitCreditNoteList
+export default UnitInvoiceList

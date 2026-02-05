@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 import { HashRouter } from "react-router-dom"
 
 import ScrollToTop from "@/functions/ScrollToTop"
@@ -61,7 +61,7 @@ function App() {
 		localStorage.setItem(state, JSON.stringify(data))
 	}
 
-	const url = process.env.MIX_FRONTEND_URL
+	const url = import.meta.env.VITE_APP_URL
 
 	// Declare states
 	const [messages, setMessages] = useState([])
@@ -78,9 +78,9 @@ function App() {
 		getNormalLocalStorage("selectedPropertyId")
 			? getNormalLocalStorage("selectedPropertyId")
 			: [
-					...auth.propertyIds ?? [],
-					...auth.subscriptionByPropertyIds ?? []
-			  ]
+				...auth.propertyIds ?? [],
+				...auth.subscriptionByPropertyIds ?? []
+			]
 	)
 	const [page, setPage] = useState({ name: "/", path: [] })
 	const [loadingItems, setLoadingItems] = useState(0)
@@ -353,5 +353,6 @@ function App() {
 export default App
 
 if (document.getElementById("app")) {
-	ReactDOM.render(<App />, document.getElementById("app"))
+	const root = createRoot(document.getElementById("app"))
+	root.render(<App />)
 }

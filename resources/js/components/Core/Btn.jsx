@@ -8,12 +8,12 @@ const Btn = ({
 	iconFront,
 	text,
 	onClick,
-	loading,
+	loading = false,
 	dataBsToggle,
 	dataBsTarget,
 	tooltipText,
-	tooltipBgColor,
-	tooltipPlacement,
+	tooltipBgColor = "primary",
+	tooltipPlacement = "top",
 }) => {
 	useEffect(() => {
 		// Initialize Bootstrap tooltips
@@ -79,10 +79,4 @@ const Btn = ({
 	)
 }
 
-Btn.defaultProps = {
-	loading: false,
-	disabled: false,
-	tooltipBgColor: "primary", // Bootstrap primary background (optional if using Bootstrap's native tooltips)
-	tooltipPlacement: "top", // Default tooltip placement
-}
 export default Btn

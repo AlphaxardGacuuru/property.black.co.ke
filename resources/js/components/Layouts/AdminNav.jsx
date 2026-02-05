@@ -130,19 +130,18 @@ const AdminMenu = (props) => {
 	// Show Admin Nav based on Location
 	const showAdminNav =
 		location.pathname.match("/admin/") ||
-		location.pathname.match("/tenant/") ||
-		(location.pathname.match("/super/") &&
-			!location.pathname.match("/admin/login") &&
-			!location.pathname.match("/admin/register") &&
-			!location.pathname.match("/socialite"))
+			location.pathname.match("/tenant/") ||
+			(location.pathname.match("/super/") &&
+				!location.pathname.match("/admin/login") &&
+				!location.pathname.match("/admin/register") &&
+				!location.pathname.match("/socialite"))
 			? "d-block"
 			: "d-none"
 
 	const profileLink = location.pathname.match("/tenant/")
 		? ""
-		: `${location.pathname.match("/super/") ? "/super" : "/admin"}/user/${
-				props.auth.id
-		  }/edit`
+		: `${location.pathname.match("/super/") ? "/super" : "/admin"}/user/${props.auth.id
+		}/edit`
 
 	return (
 		<React.Fragment>
@@ -302,9 +301,8 @@ const AdminMenu = (props) => {
 														<Img
 															src={props.auth?.avatar}
 															// className="rounded-circle bg-light p-1"
-															className={`avatar ${
-																props.auth?.activeSubscription && "premium-user"
-															}`}
+															className={`avatar ${props.auth?.activeSubscription && "premium-user"
+																}`}
 															alt="Avatar"
 														/>
 													</a>
@@ -317,9 +315,8 @@ const AdminMenu = (props) => {
 														}}>
 														<Img
 															src={props.auth?.avatar}
-															className={`avatar ${
-																props.auth?.activeSubscription && "premium-user"
-															}`}
+															className={`avatar ${props.auth?.activeSubscription && "premium-user"
+																}`}
 															alt="Avatar"
 														/>
 													</span>
@@ -332,10 +329,9 @@ const AdminMenu = (props) => {
 																<Link to={profileLink}>
 																	<Img
 																		src={props.auth?.avatar}
-																		className={`avatar ${
-																			props.auth?.activeSubscription &&
+																		className={`avatar ${props.auth?.activeSubscription &&
 																			"premium-user"
-																		}`}
+																			}`}
 																		style={{
 																			minWidth: "3em",
 																			minHeight: "3em",
@@ -389,7 +385,7 @@ const AdminMenu = (props) => {
 														{/* Landing Page End */}
 														{/* Admin Login Start */}
 														{location.pathname.match("/tenant/") ||
-														location.pathname.match("/super/") ? (
+															location.pathname.match("/super/") ? (
 															<Link
 																to="/admin/dashboard"
 																className="p-2 px-3 dropdown-item">
@@ -404,7 +400,7 @@ const AdminMenu = (props) => {
 														{/* Admin Login End */}
 														{/* Tenant Login Start */}
 														{location.pathname.match("/admin/") ||
-														location.pathname.match("/super/") ? (
+															location.pathname.match("/super/") ? (
 															<Link
 																to={`/tenant/tenants/${props.auth.id}/show`}
 																className="p-2 px-3 dropdown-item">
@@ -419,7 +415,7 @@ const AdminMenu = (props) => {
 														{/* Tenant Login End */}
 														{/* Super Login Start */}
 														{location.pathname.match("/admin/") &&
-														isSuperAdmin ? (
+															isSuperAdmin ? (
 															<Link
 																to="/super/dashboard"
 																className="p-2 px-3 dropdown-item">
@@ -557,9 +553,8 @@ const AdminMenu = (props) => {
 									<Img
 										src={props.auth?.avatar}
 										// className="rounded-circle"
-										className={`avatar ${
-											props.auth?.activeSubscription && "premium-user"
-										}`}
+										className={`avatar ${props.auth?.activeSubscription && "premium-user"
+											}`}
 										width="25px"
 										height="25px"
 										alt="Avatar"
@@ -602,7 +597,7 @@ const AdminMenu = (props) => {
 						{/* Landing Page End */}
 						{/* Admin Login Start */}
 						{location.pathname.match("/tenant/") ||
-						location.pathname.match("/super/") ? (
+							location.pathname.match("/super/") ? (
 							<Link
 								to="/admin/dashboard"
 								className="p-2 text-start text-white"
@@ -618,7 +613,7 @@ const AdminMenu = (props) => {
 						{/* Admin Login End */}
 						{/* Tenant Login Start */}
 						{location.pathname.match("/admin/") ||
-						location.pathname.match("/super/") ? (
+							location.pathname.match("/super/") ? (
 							<Link
 								to={`/tenant/tenants/${props.auth.id}/show`}
 								className="p-2 text-start text-white"

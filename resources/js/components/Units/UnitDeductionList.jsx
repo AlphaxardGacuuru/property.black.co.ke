@@ -1,49 +1,40 @@
 import React, { useEffect, useState } from "react"
 
-import InvoiceList from "@/components/Invoices/InvoiceList"
+import DeductionList from "@/components/Deductions/DeductionList"
 
-const UnitInvoiceList = (props) => {
-	const [invoices, setInvoices] = useState([])
+const UnitDeductionList = ({ userUnitId = "", ...props }) => {
+	const [deductions, setDeductions] = useState([])
 
-	const [number, setNumber] = useState("")
-	const [invoice, setInvoice] = useState("")
-	const [unit, setUnit] = useState("")
 	const [tenant, setTenant] = useState("")
-	const [type, setType] = useState("")
-	const [status, setStatus] = useState("")
+	const [unit, setUnit] = useState("")
+	const [invoiceCode, setInvoiceCode] = useState("")
 	const [startMonth, setStartMonth] = useState("")
 	const [startYear, setStartYear] = useState("")
 	const [endMonth, setEndMonth] = useState("")
 	const [endYear, setEndYear] = useState("")
 
 	useEffect(() => {
-		// Fetch Invoices
+		// Fetch Deduction
 		props.getPaginated(
-			`invoices?
+			`deductions?
 			propertyId=${props.unit?.propertyId}&
 			unitId=${props.unit?.id}&
-			number=${number}&
-			invoice=${invoice}&
-			unit=${unit}&
 			tenant=${tenant}&
 			tenantId=${props.tenant?.id}&
-			type=${type}&
-			status=${status}&
+			unit=${unit}&
+			invoiceCode=${invoiceCode}&
 			startMonth=${startMonth}&
 			endMonth=${endMonth}&
 			startYear=${startYear}&
 			endYear=${endYear}`,
-			setInvoices
+			setDeductions
 		)
 	}, [
 		props.selectedPropertyId,
 		props.tenant,
-		number,
-		invoice,
-		unit,
 		tenant,
-		type,
-		status,
+		unit,
+		invoiceCode,
 		startMonth,
 		endMonth,
 		startYear,
@@ -53,30 +44,24 @@ const UnitInvoiceList = (props) => {
 	return (
 		<div className="row">
 			<div className="col-sm-12">
-				{/* Invoices Tab */}
-				<InvoiceList
+				{/* Deductions Tab */}
+				<DeductionList
 					{...props}
-					invoices={invoices}
-					setInvoices={setInvoices}
-					setNumber={setNumber}
-					setInvoice={setNumber}
+					unit={props.unit}
+					deductions={deductions}
+					setDeductions={setDeductions}
+					setInvoiceCode={setInvoiceCode}
 					setUnit={setUnit}
 					setTenant={setTenant}
-					setType={setType}
-					setStatus={setStatus}
 					setStartMonth={setStartMonth}
 					setEndMonth={setEndMonth}
 					setStartYear={setStartYear}
 					setEndYear={setEndYear}
 				/>
-				{/* Invoices Tab End */}
+				{/* Deductions Tab End */}
 			</div>
 		</div>
 	)
 }
 
-UnitInvoiceList.defaultProps = {
-	userUnitId: "",
-}
-
-export default UnitInvoiceList
+export default UnitDeductionList

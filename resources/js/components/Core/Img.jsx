@@ -1,6 +1,13 @@
 import React from "react"
 
-const Img = ({ src, width, height, className, style, alt }) => {
+const Img = ({
+	src = "/storage/img/party-people.png",
+	width,
+	height,
+	className,
+	style,
+	alt = "image",
+}) => {
 	const handleError = (e) => {
 		// Set fallback to male-avatar.png for broken images
 		e.target.src = "/storage/avatars/male-avatar.png"
@@ -18,11 +25,6 @@ const Img = ({ src, width, height, className, style, alt }) => {
 			onError={handleError}
 		/>
 	)
-}
-
-Img.defaultProps = {
-	src: "/storage/img/party-people.png",
-	alt: "image",
 }
 
 export default Img

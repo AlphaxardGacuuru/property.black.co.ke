@@ -35,10 +35,10 @@ registerPlugin(
 	FilePondPluginFileValidateSize
 )
 
-const SocialMediaInput = (props) => {
+const SocialMediaInput = ({ required = true, text: btnText = "send", ...props }) => {
 	const history = useHistory()
 
-	const [text, setText] = useState(props.text ? props.text : "")
+	const [text, setText] = useState(btnText ? btnText : "")
 	const [attachment, setAttachment] = useState("")
 
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false)
@@ -121,7 +121,7 @@ const SocialMediaInput = (props) => {
 							value={text}
 							row="1"
 							onChange={(e) => setText(e.target.value)}
-							required={props.required}></textarea>
+							required={required}></textarea>
 					</div>
 					{/* Input End */}
 					{/* Emoji icon */}
@@ -161,7 +161,7 @@ const SocialMediaInput = (props) => {
 						<Button
 							type="submit"
 							classNameName="btn-outline-dark"
-							text={props.text}
+							text={btnText}
 							loading={loading}
 						/>
 					</div>
@@ -216,11 +216,6 @@ const SocialMediaInput = (props) => {
 			</center>
 		</form>
 	)
-}
-
-SocialMediaInput.defaultProps = {
-	required: true,
-	text: "send",
 }
 
 export default SocialMediaInput

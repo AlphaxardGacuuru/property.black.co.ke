@@ -1,4 +1,5 @@
-window._ = require("lodash")
+import _ from "lodash"
+window._ = _
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -7,10 +8,15 @@ window._ = require("lodash")
  */
 
 try {
-	window.Popper = require("popper.js").default
-	window.$ = window.jQuery = require("jquery")
+	import("@popperjs/core").then((module) => {
+		window.Popper = module.default
+	})
 
-	require("bootstrap")
+	import("jquery").then((module) => {
+		window.$ = window.jQuery = module.default
+	})
+
+	import("bootstrap")
 } catch (e) {}
 
 /**
@@ -30,25 +36,28 @@ const getLocalStorage = (state) => {
 
 // Decrypt Sanctum Token
 const decryptedToken = () => {
-	var CryptoJS = require("crypto-js")
+	import("crypto-js").then((CryptoJS) => {
+		const secretKey = "BlackPropertyAuthorizationToken"
 
-	const secretKey = "BlackPropertyAuthorizationToken"
+		// Decrypt
+		var bytes = CryptoJS.default.AES.decrypt(
+			getLocalStorage("sanctumToken"),
+			secretKey
+		)
 
-	// Decrypt
-	var bytes = CryptoJS.AES.decrypt(getLocalStorage("sanctumToken"), secretKey)
-
-	return bytes.toString(CryptoJS.enc.Utf8)
+		return bytes.toString(CryptoJS.default.enc.Utf8)
+	})
 }
 
-window.Axios = require("axios")
+import Axios from "axios"
+window.Axios = Axios
 
-// window.Axios.defaults.baseURL = process.env.MIX_APP_URL
+// window.Axios.defaults.baseURL = import.meta.env.VITE_APP_URL
 
 window.Axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
 
-window.Axios.defaults.headers.common[
-	"Authorization"
-] = `Bearer ${decryptedToken()}`
+window.Axios.defaults.headers.common["Authorization"] =
+	`Bearer ${decryptedToken()}`
 
 Axios.defaults.withCredentials = true
 
@@ -59,14 +68,15 @@ Axios.defaults.withCredentials = true
  */
 
 import Echo from "laravel-echo"
+import Pusher from "pusher-js"
 
-window.Pusher = require("pusher-js")
+window.Pusher = Pusher
 
 // window.Echo = new Echo({
 // 	version: 2,
 // 	broadcaster: "pusher",
-// 	key: process.env.MIX_PUSHER_APP_KEY,
-// 	cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+// 	key: import.meta.env.VITE_PUSHER_APP_KEY,
+// 	cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
 // 	// cluster: "", // Empty for self-hosted websockets
 // 	wsHost: window.location.hostname,
 // 	wsPort: 6008,
