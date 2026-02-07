@@ -21,6 +21,7 @@ import TenantSVG from "@/svgs/TenantSVG"
 import PersonSVG from "@/svgs/PersonSVG"
 import HomeSVG from "@/svgs/HomeSVG"
 import SuperSVG from "@/svgs/SuperSVG"
+import PersonGearSVG from "@/svgs/PersonGearSVG"
 
 const AdminMenu = (props) => {
 	const location = useLocation()
@@ -326,24 +327,20 @@ const AdminMenu = (props) => {
 													<div className="dropdown-menu rounded-0 m-0 p-0 bg-white">
 														<div className="d-flex border-bottom pb-2">
 															<div className="p-2">
-																<Link to={profileLink}>
-																	<Img
-																		src={props.auth?.avatar}
-																		className={`avatar ${props.auth?.activeSubscription &&
-																			"premium-user"
-																			}`}
-																		style={{
-																			minWidth: "3em",
-																			minHeight: "3em",
-																		}}
-																		alt="Avatar"
-																	/>
-																</Link>
+																<Img
+																	src={props.auth?.avatar}
+																	className={`avatar ${props.auth?.activeSubscription &&
+																		"premium-user"
+																		}`}
+																	style={{
+																		minWidth: "3em",
+																		minHeight: "3em",
+																	}}
+																	alt="Avatar"
+																/>
 															</div>
 															<div>
-																<Link
-																	to={profileLink}
-																	className="p-1 px-2 pt-3 dropdown-item">
+																<div className="p-1 px-2 pt-3 dropdown-item">
 																	<h6 className="text-nowrap fs-6">
 																		{props.auth?.name}
 																	</h6>
@@ -367,10 +364,22 @@ const AdminMenu = (props) => {
 																		</div>
 																	))}
 																	{/* Role Names End */}
-																</Link>
+																</div>
 															</div>
 														</div>
 														{/* Name End */}
+														{/* Settings Start */}
+														<Link
+															to={profileLink}
+															className="p-2 px-3 dropdown-item">
+															<h6 className="fs-6">
+																<span className="me-2">
+																	<PersonGearSVG />
+																</span>
+																Settings
+															</h6>
+														</Link>
+														{/* Settings End */}
 														{/* Landing Page Start */}
 														<Link
 															to="/"
@@ -582,6 +591,19 @@ const AdminMenu = (props) => {
 								</div>
 							</div>
 						</Link>
+						{/* Settings Start */}
+						<Link
+							to={profileLink}
+							className="p-2 text-start text-white"
+							onClick={() => setBottomMenu("")}>
+							<h6>
+								<span className="ms-3 me-4">
+									<PersonGearSVG />
+								</span>
+								Settings
+							</h6>
+						</Link>
+						{/* Settings End */}
 						{/* Landing Page Start */}
 						<Link
 							to="/"

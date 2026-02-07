@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom/cjs/react-router-dom.min"
+import { useLocation, useParams } from "react-router-dom/cjs/react-router-dom.min"
 
 import Btn from "@/components/Core/Btn"
 import MyLink from "@/components/Core/MyLink"
@@ -31,6 +31,8 @@ registerPlugin(
 const edit = (props) => {
 	var { id } = useParams()
 
+	const location = useLocation()
+
 	const [user, setUser] = useState({})
 
 	const [name, setName] = useState()
@@ -43,6 +45,11 @@ const edit = (props) => {
 	const [invoicesGeneratedNotification, setInvoicesGeneratedNotification] =
 		useState()
 	const [invoiceReminderNotification, setInvoiceReminderNotification] =
+		useState()
+
+	const [superInvoicesGeneratedNotification, setSuperInvoicesGeneratedNotification] =
+		useState()
+	const [superInvoiceReminderNotification, setSuperInvoiceReminderNotification] =
 		useState()
 
 	// Get Faculties and Departments
@@ -62,6 +69,12 @@ const edit = (props) => {
 			setInvoiceReminderNotification(
 				res.data.data.settings?.invoiceReminderNotification ?? false
 			)
+			setSuperInvoicesGeneratedNotification(
+				res.data.data.settings?.superInvoicesGeneratedNotification ?? false
+			)
+			setSuperInvoiceReminderNotification(
+				res.data.data.settings?.superInvoiceReminderNotification ?? false
+			)
 		})
 	}, [])
 
@@ -75,6 +88,8 @@ const edit = (props) => {
 					...user.settings,
 					invoicesGeneratedNotification: invoicesGeneratedNotification,
 					invoiceReminderNotification: invoiceReminderNotification,
+					superInvoicesGeneratedNotification: superInvoicesGeneratedNotification,
+					superInvoiceReminderNotification: superInvoiceReminderNotification,
 				},
 			})
 				.then((res) => {
@@ -96,9 +111,20 @@ const edit = (props) => {
 					setInvoiceReminderNotification(
 						user.settings?.invoiceReminderNotification ?? false
 					)
+					setSuperInvoicesGeneratedNotification(
+						user.settings?.superInvoicesGeneratedNotification ?? false
+					)
+					setSuperInvoiceReminderNotification(
+						user.settings?.superInvoiceReminderNotification ?? false
+					)
 				})
 		}
-	}, [invoicesGeneratedNotification, invoiceReminderNotification])
+	}, [
+		invoicesGeneratedNotification,
+		invoiceReminderNotification,
+		superInvoicesGeneratedNotification,
+		superInvoiceReminderNotification
+	])
 
 	/*
 	 * Submit Form
@@ -214,67 +240,137 @@ const edit = (props) => {
 
 					<h4 className="text-center my-4">Notifications</h4>
 
-					{/* Invoices Generated Notification Switch Start */}
-					<div className="d-flex justify-content-between align-items-center mx-2 mb-4">
-						<div className="form-check-label">
-							Invoices Generated Notification
-						</div>
-						<div className="form-check form-switch">
-							{user.id && (
-								<input
-									id="invoices-generated"
-									className="form-check-input"
-									type="checkbox"
-									role="switch"
-									onChange={(e) => {
-										setInvoicesGeneratedNotification(e.target.checked)
-									}}
-									disabled={updateLoading}
-									style={{
-										width: "2rem",
-										height: "1rem",
-										transform: "scale(1.2)",
-										cursor: "pointer",
-									}}
-									defaultChecked={
-										user.settings?.invoicesGeneratedNotification ?? false
-									}
-								/>
-							)}
-						</div>
-					</div>
-					{/* Invoices Generated Notification Switch End */}
+					{location.pathname.match("/admin/") && (
+						<React.Fragment>
+							{/* Invoices Generated Notification Switch Start */}
+							<div className="d-flex justify-content-between align-items-center mx-2 mb-4">
+								<div className="form-check-label">
+									Invoices Generated Notification
+								</div>
+								<div className="form-check form-switch">
+									{user.id && (
+										<input
+											id="invoices-generated"
+											className="form-check-input"
+											type="checkbox"
+											role="switch"
+											onChange={(e) => {
+												setInvoicesGeneratedNotification(e.target.checked)
+											}}
+											disabled={updateLoading}
+											style={{
+												width: "2rem",
+												height: "1rem",
+												transform: "scale(1.2)",
+												cursor: "pointer",
+											}}
+											defaultChecked={
+												user.settings?.invoicesGeneratedNotification ?? false
+											}
+										/>
+									)}
+								</div>
+							</div>
+							{/* Invoices Generated Notification Switch End */}
 
-					{/* Invoice Reminder Notification Switch Start */}
-					<div className="d-flex justify-content-between align-items-center mx-2 mb-4">
-						<div className="form-check-label">
-							Invoice Reminder Notification
-						</div>
-						<div className="form-check form-switch">
-							{user.id && (
-								<input
-									id="invoice-reminder"
-									className="form-check-input"
-									type="checkbox"
-									role="switch"
-									onChange={(e) => {
-										setInvoiceReminderNotification(e.target.checked)
-									}}
-									disabled={updateLoading}
-									style={{
-										width: "2rem",
-										height: "1rem",
-										transform: "scale(1.2)",
-										cursor: "pointer",
-									}}
-									defaultChecked={
-										user.settings?.invoiceReminderNotification ?? false
-									}
-								/>
-							)}
-						</div>
-					</div>
-					{/* Invoice Reminder Notification Switch End */}
+							{/* Invoice Reminder Notification Switch Start */}
+							<div className="d-flex justify-content-between align-items-center mx-2 mb-4">
+								<div className="form-check-label">
+									Invoice Reminder Notification
+								</div>
+								<div className="form-check form-switch">
+									{user.id && (
+										<input
+											id="invoice-reminder"
+											className="form-check-input"
+											type="checkbox"
+											role="switch"
+											onChange={(e) => {
+												setInvoiceReminderNotification(e.target.checked)
+											}}
+											disabled={updateLoading}
+											style={{
+												width: "2rem",
+												height: "1rem",
+												transform: "scale(1.2)",
+												cursor: "pointer",
+											}}
+											defaultChecked={
+												user.settings?.invoiceReminderNotification ?? false
+											}
+										/>
+									)}
+								</div>
+							</div>
+							{/* Invoice Reminder Notification Switch End */}
+						</React.Fragment>
+					)}
+
+					{location.pathname.match("/super/") && (
+						<React.Fragment>
+							{/* Super Invoices Generated Notification Switch Start */}
+							<div className="d-flex justify-content-between align-items-center mx-2 mb-4">
+								<div className="form-check-label">
+									Super Invoices Generated Notification
+								</div>
+								<div className="form-check form-switch">
+									{user.id && (
+										<input
+											id="super-invoices-generated"
+											className="form-check-input"
+											type="checkbox"
+											role="switch"
+											onChange={(e) => {
+												setSuperInvoicesGeneratedNotification(e.target.checked)
+											}}
+											disabled={updateLoading}
+											style={{
+												width: "2rem",
+												height: "1rem",
+												transform: "scale(1.2)",
+												cursor: "pointer",
+											}}
+											defaultChecked={
+												user.settings?.superInvoicesGeneratedNotification ?? false
+											}
+										/>
+									)}
+								</div>
+							</div>
+							{/* Super Invoices Generated Notification Switch End */}
+
+							{/* Super Invoice Reminder Notification Switch Start */}
+							<div className="d-flex justify-content-between align-items-center mx-2 mb-4">
+								<div className="form-check-label">
+									Super Invoice Reminder Notification
+								</div>
+								<div className="form-check form-switch">
+									{user.id && (
+										<input
+											id="super-invoice-reminder"
+											className="form-check-input"
+											type="checkbox"
+											role="switch"
+											onChange={(e) => {
+												setSuperInvoiceReminderNotification(e.target.checked)
+											}}
+											disabled={updateLoading}
+											style={{
+												width: "2rem",
+												height: "1rem",
+												transform: "scale(1.2)",
+												cursor: "pointer",
+											}}
+											defaultChecked={
+												user.settings?.superInvoiceReminderNotification ?? false
+											}
+										/>
+									)}
+								</div>
+							</div>
+							{/* Super Invoice Reminder Notification Switch End */}
+						</React.Fragment>
+					)}
 
 					<div className="col-sm-4"></div>
 				</form>
