@@ -8,16 +8,20 @@ const HeroHeading = ({ heading, data }) => {
 		<div
 			className={`my-auto`}>
 			<h4
-				className={`${
-					location.pathname.match("/admin/")
-						? "text-primary text-primary"
+				className={`${location.pathname.match("/admin/")
+						? "text-primary"
 						: location.pathname.match("/tenant/")
-						? "text-success text-success"
-						: "text-secondary text-secondary"
-				} fw-normal`}>
+							? "text-success"
+							: "text-danger"
+					} fw-normal`}>
 				{heading}
 			</h4>
-			<span className="fs-4">{data}</span>
+			<span className={`${location.pathname.match("/admin/")
+				? "text-primary"
+				: location.pathname.match("/tenant/")
+					? "text-success"
+					: "text-danger"
+				} fs-4`}>{data}</span>
 		</div>
 	)
 }

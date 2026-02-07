@@ -174,7 +174,12 @@ const AdminMenu = (props) => {
 										<div className="logo-area hidden me-2 mb-2">
 											<Link
 												to="/"
-												className="text-white">
+												className={`${location.pathname.match("/admin/")
+													? "text-primary text-primary"
+													: location.pathname.match("/tenant/")
+														? "text-success text-success"
+														: "text-danger text-danger"
+													} fw-normal`}>
 												<LogoSVG />
 											</Link>
 										</div>
@@ -291,7 +296,7 @@ const AdminMenu = (props) => {
 												</div>
 												{/* Notification Dropdown End */}
 												{/* Avatar Dropdown */}
-												<div className="dropdown-center">
+												<div className="dropdown">
 													{/* Avatar */}
 													<a
 														href="#"
@@ -324,7 +329,7 @@ const AdminMenu = (props) => {
 													{/* For small screens end */}
 													{/* Avatar End */}
 													{/* Name Start */}
-													<div className="dropdown-menu rounded-0 m-0 p-0 bg-white">
+													<div className="dropdown-menu rounded-0 m-0 p-0 bg-white dropdown-menu-end me-3">
 														<div className="d-flex border-bottom pb-2">
 															<div className="p-2">
 																<Img
@@ -369,16 +374,17 @@ const AdminMenu = (props) => {
 														</div>
 														{/* Name End */}
 														{/* Settings Start */}
-														<Link
-															to={profileLink}
-															className="p-2 px-3 dropdown-item">
-															<h6 className="fs-6">
-																<span className="me-2">
-																	<PersonGearSVG />
-																</span>
-																Settings
-															</h6>
-														</Link>
+														{!location.pathname.match("/tenant") && (
+															<Link
+																to={profileLink}
+																className="p-2 px-3 dropdown-item">
+																<h6 className="fs-6">
+																	<span className="me-2">
+																		<PersonGearSVG />
+																	</span>
+																	Settings
+																</h6>
+															</Link>)}
 														{/* Settings End */}
 														{/* Landing Page Start */}
 														<Link
@@ -552,11 +558,7 @@ const AdminMenu = (props) => {
 					<div
 						className="m-0 p-0"
 						style={{ display: avatarVisibility }}>
-						<Link
-							to={profileLink}
-							style={{ padding: "0px", margin: "0px" }}
-							className="border-bottom text-start"
-							onClick={() => setBottomMenu("")}>
+						<div className="border-bottom text-start pb-4">
 							<div className="d-flex align-items-center">
 								<div className="ms-3 me-3">
 									<Img
@@ -590,19 +592,21 @@ const AdminMenu = (props) => {
 									{/* Role Names End */}
 								</div>
 							</div>
-						</Link>
+						</div>
 						{/* Settings Start */}
-						<Link
-							to={profileLink}
-							className="p-2 text-start text-white"
-							onClick={() => setBottomMenu("")}>
-							<h6>
-								<span className="ms-3 me-4">
-									<PersonGearSVG />
-								</span>
-								Settings
-							</h6>
-						</Link>
+						{!location.pathname.match("/tenant") && (
+							<Link
+								to={profileLink}
+								className="p-2 text-start text-white"
+								onClick={() => setBottomMenu("")}>
+								<h6>
+									<span className="ms-3 me-4">
+										<PersonGearSVG />
+									</span>
+									Settings
+								</h6>
+							</Link>
+						)}
 						{/* Settings End */}
 						{/* Landing Page Start */}
 						<Link

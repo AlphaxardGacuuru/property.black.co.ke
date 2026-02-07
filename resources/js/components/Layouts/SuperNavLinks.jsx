@@ -35,12 +35,12 @@ const SuperNavLinks = (props) => {
 
 	// Function for showing active color
 	const active = (check) => {
-		return location.pathname.match(check) && "text-secondary"
+		return location.pathname.match(check) && "text-danger"
 	}
 
 	// Function for showing active color
 	const activeStrict = (check) => {
-		return location.pathname == check && "text-secondary"
+		return location.pathname == check && "text-danger"
 	}
 
 	const navLinks = [

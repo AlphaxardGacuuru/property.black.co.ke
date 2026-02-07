@@ -12,7 +12,6 @@ const Btn = ({
 	dataBsToggle,
 	dataBsTarget,
 	tooltipText,
-	tooltipBgColor = "primary",
 	tooltipPlacement = "top",
 }) => {
 	useEffect(() => {

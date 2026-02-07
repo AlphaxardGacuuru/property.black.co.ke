@@ -37,7 +37,7 @@ const DownloadApp = (props) => {
 					<br />
 
 					<Img
-						src="storage/img/android-chrome-512x512.png"
+						src="/android-chrome-512x512.png"
 						width="25%"
 						className="rounded-circle shadow"
 					/>
