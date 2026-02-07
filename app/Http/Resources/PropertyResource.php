@@ -41,7 +41,7 @@ class PropertyResource extends JsonResource
 			"name" => $this->name,
 			"location" => $this->location,
 			"depositFormula" => $this->deposit_formula,
-			"serviceCharge" => $this->service_charge?->service,
+			"serviceCharge" => $this->service_charge,
 			"waterBillRateCouncil" => $this->water_bill_rate->council,
 			"waterBillRateBorehole" => $this->water_bill_rate->borehole,
 			"waterBillRateTanker" => $this->water_bill_rate->tanker,
