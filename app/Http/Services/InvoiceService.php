@@ -271,8 +271,12 @@ class InvoiceService extends Service
 				return $userUnit->unit->property->service_charge?->parking;
 				break;
 
-			default:
+			case "water":
 				return $this->getWaterBill($request, $userUnitId);
+				break;
+
+			default:
+				return 0;
 				break;
 		}
 	}

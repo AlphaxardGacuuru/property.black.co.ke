@@ -59,12 +59,18 @@ class WaterReadingService extends Service
 				->where("month", $request->month)
 				->where("year", $request->year);
 
-			$lastMonth = $request->month - 1;
-
 			// Get Last Water Reading
 			$previousReadingQuery = WaterReading::where("user_unit_id", $reading["userUnitId"])
-				->where("month", $lastMonth)
-				->where("year", $request->year)
+				->where("type", $type)
+				->where(function ($query) use ($request) {
+					$query->where("year", "<", $request->year)
+						->orWhere(function ($query) use ($request) {
+							$query->where("year", $request->year)
+								->where("month", "<", $request->month);
+						});
+				})
+				->orderBy("year", "DESC")
+				->orderBy("month", "DESC")
 				->first();
 
 			$previouReading = $previousReadingQuery ? $previousReadingQuery->reading : 0;

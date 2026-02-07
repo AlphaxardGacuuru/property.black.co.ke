@@ -33,9 +33,21 @@ const Pie = ({ cutout = "60%", size = "1em", ...props }) => {
 		},
 	}
 
+	const chartRef = useRef(null)
+
 	useEffect(() => {
-		new Chart(ctx.current, config)
-	}, [])
+		if (chartRef.current) {
+			chartRef.current.destroy()
+		}
+
+		chartRef.current = new window.Chart(ctx.current, config)
+
+		return () => {
+			if (chartRef.current) {
+				chartRef.current.destroy()
+			}
+		}
+	}, [props.labels, props.datasets, props.options])
 
 	return (
 		<div className="p-2">

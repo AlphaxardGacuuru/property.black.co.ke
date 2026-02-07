@@ -34,9 +34,21 @@ const Line = (props) => {
 		},
 	}
 
+	const chartRef = useRef(null)
+
 	useEffect(() => {
-		new Chart(ctx.current, config)
-	}, [])
+		if (chartRef.current) {
+			chartRef.current.destroy()
+		}
+
+		chartRef.current = new window.Chart(ctx.current, config)
+
+		return () => {
+			if (chartRef.current) {
+				chartRef.current.destroy()
+			}
+		}
+	}, [props.labels, props.datasets])
 
 	return (
 		<div

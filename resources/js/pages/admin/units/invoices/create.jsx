@@ -15,7 +15,7 @@ const create = (props) => {
 	const { unitId } = useParams()
 	var history = useHistory()
 
-	const types = ["rent", "water", "service_charge"]
+	const types = ["rent", "water", "service"]
 
 	const [unit, setUnit] = useState({})
 
@@ -78,7 +78,7 @@ const create = (props) => {
 
 		var noServiceCharge = serviceCharge < 1
 
-		if (type == "service_charge" && noServiceCharge) {
+		if (type == "service" && noServiceCharge) {
 			return true
 		} else {
 			return false

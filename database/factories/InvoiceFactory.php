@@ -17,7 +17,7 @@ class InvoiceFactory extends Factory
 	 */
 	public function definition()
 	{
-		$types = ["rent", "water", "service_charge"];
+		$types = ["rent", "water", "service"];
 
 		return [
 			"user_unit_id" => "userUnitId",

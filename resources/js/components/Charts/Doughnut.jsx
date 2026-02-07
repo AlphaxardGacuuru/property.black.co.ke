@@ -35,9 +35,21 @@ const Doughnut = ({ cutout = "60%", size = "1em", ...props }) => {
 		plugins: props.plugins,
 	}
 
+	const chartRef = useRef(null)
+
 	useEffect(() => {
-		new Chart(ctx.current, config)
-	}, [])
+		if (chartRef.current) {
+			chartRef.current.destroy()
+		}
+
+		chartRef.current = new window.Chart(ctx.current, config)
+
+		return () => {
+			if (chartRef.current) {
+				chartRef.current.destroy()
+			}
+		}
+	}, [props.labels, props.datasets, props.options, props.plugins])
 
 	return (
 		<div className="p-2">

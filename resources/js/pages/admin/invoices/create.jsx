@@ -15,7 +15,7 @@ const create = (props) => {
 		"deposit",
 		"rent",
 		"water",
-		"service_charge",
+		"service",
 		"electricity",
 		"garbage",
 		"security",
@@ -109,7 +109,7 @@ const create = (props) => {
 
 		var noServiceCharge = serviceCharge < 1
 
-		if (type == "service_charge" && noServiceCharge) {
+		if (type == "service" && noServiceCharge) {
 			return true
 		} else {
 			return false

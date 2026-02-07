@@ -426,11 +426,11 @@ class DashboardService extends Service
 		$isSuper = in_array("All", $propertyIds);
 
 		if ($isSuper) {
-			$serviceChargeQuery = Invoice::where("type", "service_charge");
+			$serviceChargeQuery = Invoice::where("type", "service");
 		} else {
 			$serviceChargeQuery = Invoice::whereHas("userUnit.unit.property", function ($query) use ($propertyIds) {
 				$query->whereIn("id", $propertyIds);
-			})->where("type", "service_charge");
+			})->where("type", "service");
 		}
 
 		$paid = $serviceChargeQuery
@@ -454,11 +454,11 @@ class DashboardService extends Service
 		$isSuper = in_array("All", $propertyIds);
 
 		if ($isSuper) {
-			$serviceChargeQuery = Invoice::where("type", "service_charge");
+			$serviceChargeQuery = Invoice::where("type", "service");
 		} else {
 			$serviceChargeQuery = Invoice::whereHas("userUnit.unit.property", function ($query) use ($propertyIds) {
 				$query->whereIn("id", $propertyIds);
-			})->where("type", "service_charge");
+			})->where("type", "service");
 		}
 
 		$getRentThisYear = $serviceChargeQuery
@@ -484,11 +484,11 @@ class DashboardService extends Service
 		$isSuper = in_array("All", $propertyIds);
 
 		if ($isSuper) {
-			$serviceChargeQuery = Invoice::where("type", "service_charge");
+			$serviceChargeQuery = Invoice::where("type", "service");
 		} else {
 			$serviceChargeQuery = Invoice::whereHas("userUnit.unit.property", function ($query) use ($propertyIds) {
 				$query->whereIn("id", $propertyIds);
-			})->where("type", "service_charge");
+			})->where("type", "service");
 		}
 
 		$getRentThisYear = $serviceChargeQuery

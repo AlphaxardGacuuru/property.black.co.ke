@@ -367,7 +367,7 @@ const InvoiceList = (props) => {
 								{ id: "", name: "All" },
 								{ id: "rent", name: "Rent" },
 								{ id: "water", name: "Water" },
-								{ id: "service_charge", name: "Service Charge" },
+								{ id: "service", name: "Service" },
 							].map((type, key) => (
 								<option
 									key={key}

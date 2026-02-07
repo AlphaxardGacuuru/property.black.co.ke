@@ -21,7 +21,7 @@ const edit = (props) => {
 		"deposit",
 		"rent",
 		"water",
-		"service_charge",
+		"service",
 		"electricity",
 		"garbage",
 		"security",

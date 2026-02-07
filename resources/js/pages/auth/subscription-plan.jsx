@@ -528,7 +528,7 @@ const SubscriptionPlan = (props) => {
 								<div className="d-flex justify-content-center align-items-center">
 									<div className="ms-2">
 										<Img
-											src="/storage/img/mpesa-logo.jpg"
+											src="/img/mpesa-logo.jpg"
 											style={{ width: "44px", height: "auto" }}
 										/>
 									</div>

@@ -27,7 +27,7 @@ const KopokopoBtn = (props) => {
 			icon={
 				<div>
 					<Img
-						src="/storage/img/mpesa-logo.jpg"
+						src="/img/mpesa-logo.jpg"
 						className="btn-secondary me-1"
 						style={{ width: "44px", height: "auto" }}
 					/>
