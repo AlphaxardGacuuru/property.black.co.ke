@@ -305,7 +305,7 @@ class GenerateInvoicesJob implements ShouldQueue
 			]
 		);
 
-		if ($user->settings?->superInvoicesGeneratedNotification) {
+		if ($superAdmin->settings?->superInvoicesGeneratedNotification) {
 			$superAdmin->notify(new InvoicesGeneratedNotification($result));
 		}
 

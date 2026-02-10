@@ -180,7 +180,7 @@ class SendInvoiceRemindersJob implements ShouldQueue
 			]
 		);
 
-		if ($user->settings?->superInvoiceReminderNotification) {
+		if ($superAdmin->settings?->superInvoiceReminderNotification) {
 			$superAdmin->notify(new InvoiceRemindersSentNotifications($result));
 		}
 
